@@ -11,3 +11,11 @@ devices.forEach(function(device) {
     </tr>`
     );
    });
+
+document.querySelector('#add-device').addEventListener('click',
+function() {
+ const user = document.querySelector('#user').value;
+ const name = document.querySelector('#name').value;
+ devices.push({ user: user, name: name });
+ console.log(devices);
+});
