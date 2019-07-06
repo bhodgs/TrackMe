@@ -1,7 +1,6 @@
-const devices = [];
-devices.push({ user: "Mary", name: "Mary's iPhone" });
-devices.push({ user: "Alex", name: "Alex's Surface Pro" });
-devices.push({ user: "Mary", name: "Mary's MacBook" });
+const devices = JSON.parse(localStorage.getItem('devices')) || [];
+
+
 
 devices.forEach(function(device) {
     $('#devices tbody').append(`
@@ -12,10 +11,11 @@ devices.forEach(function(device) {
     );
    });
 
-document.querySelector('#add-device').addEventListener('click',
-function() {
- const user = document.querySelector('#user').value;
- const name = document.querySelector('#name').value;
- devices.push({ user: user, name: name });
- console.log(devices);
-});
+
+   $('#add-device').on('click', function() {
+    const user = $('#user').val();
+    const name = $('#name').val();
+    devices.push({ user, name });
+    localStorage.setItem('devices', JSON.stringify(devices));
+    location.href = 'device-list.html'
+   });
