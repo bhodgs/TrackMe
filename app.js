@@ -19,3 +19,8 @@ devices.forEach(function(device) {
     localStorage.setItem('devices', JSON.stringify(devices));
     location.href = 'device-list.html'
    });
+
+   $('#send-command').on('click', function() {
+       const command = $('#command').val();
+       console.log(`command: ${command}`);
+   });
