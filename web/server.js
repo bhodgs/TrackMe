@@ -25,11 +25,15 @@ app.get('/register-device', (req, res) => {
     res.sendFile(`${base}/register-device.html`);
 });
 
-app.get('/about', (req, res) => {
+app.get('/about-me', (req, res) => {
     console.log('Loading about me.');
     res.sendFile(`${base}/about-me.html`);
 });
 
+app.get('/navbar', (req, res) => {
+    console.log('Loading navbar.');
+    res.sendFile(`${base}/navbar.html`);
+});
 
 app.get('*', (req, res) => {
     console.log('Loading 404.');
