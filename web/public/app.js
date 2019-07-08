@@ -14,6 +14,15 @@ devices.forEach(function(device) {
     );
    });
 
+   users.forEach(function(user) {
+    $('#devices tbody').append(`
+    <tr>
+    <td>${user.username}</td>
+    <td>${user.password}</td>
+    </tr>`
+    );
+   });
+
 $('#add-device').on('click', function() {
     const user = $('#user').val();
     const name = $('#name').val();
@@ -22,25 +31,25 @@ $('#add-device').on('click', function() {
     location.href = '/'
 });
 
-$('#send-command').on('click', function() {
-       const command = $('#command').val();
-});
-
 $('#add-user').on('click', function() {
     const username = $('#username').val()
     const password = $('#password').val()
     const confirmpassword = $('#confirmpassword').val()
 
-    const exists = users.find(user => user.name === username);
-    if(exists == undefined){
-        users.push({ username, password, confirmpassword })
-        localStorage.setItem('users', JSON.stringify(users));
-        location.href = '/login.html'
-    }
-    else{
-        /* Tell user */
+    if(username=='' || password==''){
+        alert('Please enter a username and password.')
     }
 
-    
-
+    if(password!=confirmpassword){
+        alert('Your passwords did not match.')
+    }else if(password==confirmpassword){
+        if(users.find(user => user.username === username) == undefined){
+            users.push({ username, password })
+            localStorage.setItem('users', JSON.stringify(users));
+            location.href = '/login'
+        }else{
+            alert('Username has been taken.');
+        }
+    }  
 });
+
