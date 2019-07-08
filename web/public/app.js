@@ -52,7 +52,7 @@ $('#add-user').on('click', function() {
         }else{
             alert('Username has been taken.');
         }
-    }  
+    }
 });
 
 $('#Login').on('click', function() {
@@ -89,7 +89,6 @@ const logout = () => {
     });
     currentUser.authenticated = false
     localStorage.setItem('users', JSON.stringify(users));
-    
     location.href = '/login'
 }
 
