@@ -30,6 +30,16 @@ app.get('/about-me', (req, res) => {
     res.sendFile(`${base}/about-me.html`);
 });
 
+app.get('/registration', (req, res) => {
+    console.log('Loading registration.');
+    res.sendFile(`${base}/registration.html`);
+});
+
+app.get('/login', (req, res) => {
+    console.log('Loading login.');
+    res.sendFile(`${base}/login.html`);
+});
+
 app.get('/navbar', (req, res) => {
     console.log('Loading navbar.');
     res.sendFile(`${base}/navbar.html`);

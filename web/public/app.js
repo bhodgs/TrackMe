@@ -30,7 +30,17 @@ $('#add-user').on('click', function() {
     const username = $('#username').val()
     const password = $('#password').val()
     const confirmpassword = $('#confirmpassword').val()
-    users.push({ username, password, confirmpassword })
-    localStorage.setItem('users', JSON.stringify(users));
-    location.href = '/login'
+
+    const exists = users.find(user => user.name === username);
+    if(exists == undefined){
+        users.push({ username, password, confirmpassword })
+        localStorage.setItem('users', JSON.stringify(users));
+        location.href = '/login.html'
+    }
+    else{
+        /* Tell user */
+    }
+
+    
+
 });
