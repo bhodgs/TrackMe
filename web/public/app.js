@@ -53,3 +53,21 @@ $('#add-user').on('click', function() {
     }  
 });
 
+$('#Login').on('click', function() {
+    const username = $('#username').val()
+    const password = $('#password').val()
+
+    if(users.find(user => user.username === username) == undefined){
+        alert('Incorrect username')
+    }else{
+        if(users.find(user => user.password === password) != undefined){
+            /* login */
+            user.isAuthenticated = true
+        }
+        else{
+            alert('Incorrect password')
+        }
+    }
+
+})
+
