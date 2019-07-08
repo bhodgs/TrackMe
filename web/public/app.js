@@ -1,7 +1,9 @@
 const devices = JSON.parse(localStorage.getItem('devices')) || [];
+const users = JSON.parse(localStorage.getItem('users')) || [];
 
 $('#navbar').load('navbar.html')
 $('#footer').load('footer.html')
+
 
 devices.forEach(function(device) {
     $('#devices tbody').append(`
@@ -22,4 +24,13 @@ $('#add-device').on('click', function() {
 
 $('#send-command').on('click', function() {
        const command = $('#command').val();
+});
+
+$('#add-user').on('click', function() {
+    const username = $('#username').val()
+    const password = $('#password').val()
+    const confirmpassword = $('#confirmpassword').val()
+    users.push({ username, password, confirmpassword })
+    localStorage.setItem('users', JSON.stringify(users));
+    location.href = '/login'
 });
