@@ -16,16 +16,31 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="expanded-nav">
-        <div class="navbar-nav">
+        <div class="navbar-nav" id="auth-nav">
             <a class="nav-item nav-link" href="/">Devices</a>
             <a class="nav-item nav-link" href="/register-device">Register Device</a>
             <a class="nav-item nav-link" href="/registration">Register</a>
-            <a class="nav-item nav-link" href="/login">Login</a>
             <a class="nav-item nav-link" href="/send-command">Send Command</a>
             <a class="nav-item nav-link" href="/about-me">About Me</a>
         </div>
     </div>
 </nav>
+
+<script>
+        const userlist = JSON.parse(localStorage.getItem('users')) || [];
+        var isAuthenticated = false
+        const logoutElement = '<a class="nav-item nav-link" href="/login" onClick="logout()">Logout</a>'
+        const loginElement = '<a class="nav-item nav-link" href="/login">Login</a>'
+        userlist.forEach(function(user){
+            if(user.authenticated==true)
+            {
+                $('#auth-nav').append(logoutElement)
+            }
+            else if(user.authenticated==false){
+                $('#auth-nav').append(loginElement)
+            };
+            });
+    </script>
 
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="app.js"></script>

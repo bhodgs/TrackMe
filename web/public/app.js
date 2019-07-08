@@ -14,11 +14,12 @@ devices.forEach(function(device) {
     );
    });
 
-   users.forEach(function(user) {
-    $('#devices tbody').append(`
+users.forEach(function(user) {
+    $('#users tbody').append(`
     <tr>
     <td>${user.username}</td>
     <td>${user.password}</td>
+    <td>${user.authenticated}</td>
     </tr>`
     );
    });
@@ -35,6 +36,7 @@ $('#add-user').on('click', function() {
     const username = $('#username').val()
     const password = $('#password').val()
     const confirmpassword = $('#confirmpassword').val()
+    const authenticated = false
 
     if(username=='' || password==''){
         alert('Please enter a username and password.')
@@ -44,7 +46,7 @@ $('#add-user').on('click', function() {
         alert('Your passwords did not match.')
     }else if(password==confirmpassword){
         if(users.find(user => user.username === username) == undefined){
-            users.push({ username, password })
+            users.push({ username, password, authenticated })
             localStorage.setItem('users', JSON.stringify(users));
             location.href = '/login'
         }else{
@@ -57,17 +59,37 @@ $('#Login').on('click', function() {
     const username = $('#username').val()
     const password = $('#password').val()
 
-    if(users.find(user => user.username === username) == undefined){
+    usernameCheck = users.find(user => user.username === username)
+    authenticated = true
+
+    if(usernameCheck == undefined){
         alert('Incorrect username')
     }else{
-        if(users.find(user => user.password === password) != undefined){
-            /* login */
-            user.isAuthenticated = true
-        }
-        else{
-            alert('Incorrect password')
-        }
+        users.forEach(function(user){
+            if(user.password == password && user.username == username){
+                user.authenticated = true
+                localStorage.setItem('users', JSON.stringify(users));
+                alert("Success, logged in.")
+            }
+            else{
+                alert('Password incorrect.')
+            }
+        });
+        
     }
 
 })
+
+const logout = () => {
+    var currentUser = undefined
+    users.forEach(function(user){
+        if(user.authenticated == true){
+            currentUser = user
+        }
+    });
+    currentUser.authenticated = false
+    localStorage.setItem('users', JSON.stringify(users));
+    
+    location.href = '/login'
+}
 
