@@ -1,4 +1,13 @@
-const response = $.get('http://localhost:3001/devices')
+
+
+const API_URL = 'http://localhost:5000/api';
+
+const users = JSON.parse(localStorage.getItem('users')) || [];
+
+$('#navbar').load('navbar.html')
+$('#footer').load('footer.html')
+
+const response = $.get(`${API_URL}/devices`)
 .then(response => {
   response.forEach(device => {
     $('#devices tbody').append(`
@@ -11,12 +20,6 @@ const response = $.get('http://localhost:3001/devices')
 .catch(error => {
 console.error(`Error: ${error}`);
 });
-
-const users = JSON.parse(localStorage.getItem('users')) || [];
-
-$('#navbar').load('navbar.html')
-$('#footer').load('footer.html')
-
 
 devices.forEach(function(device) {
     $('#devices tbody').append(`
@@ -46,7 +49,7 @@ users.forEach(function(user) {
       user,
       sensorData
     };
-    $.post('http://localhost:3001/devices', body)
+    $.post(`${API_URL}/devices`, body)
     .then(response => {
       location.href = '/';
     })
