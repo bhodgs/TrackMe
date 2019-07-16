@@ -51,7 +51,7 @@ app.post('/api/devices', (req, res) => {
 
 app.post('/api/authenticate', (req, res) => {
   const {name, password} = req.body;
-  userCheck = User.findOne({"name": name}).then(doc => {
+  userCheck = User.findOne({name}).then(doc => {
     if(!doc){ return res.send('User not found.')}
     else if(doc.password == password) 
     { 
@@ -71,7 +71,7 @@ app.post('/api/authenticate', (req, res) => {
 
 app.post('/api/register', (req, res) =>{
   const {name, password, isAdmin} = req.body;
-  User.findOne({"name": name}).then(doc => {
+  User.findOne({name}).then(doc => {
     if(doc){return res.send('Username taken.')}
     else{
       const newUser = new User({
