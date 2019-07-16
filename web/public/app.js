@@ -49,8 +49,7 @@ users.forEach(function(user) {
       user,
       sensorData
     };
-    $.post(`${API_URL}/devices`, body)
-    .then(response => {
+    $.post(`${API_URL}/devices`, body).then(response => {
       location.href = '/';
     })
     .catch(error => {
@@ -60,50 +59,34 @@ users.forEach(function(user) {
 $('#add-user').on('click', function() {
     const username = $('#username').val()
     const password = $('#password').val()
-    const confirmpassword = $('#confirmpassword').val()
-    const authenticated = false
-
+    const confirmpassword = $('#confirmpassword').val();
     if(username=='' || password==''){
         alert('Please enter a username and password.')
     }
-
-    if(password!=confirmpassword){
+    else if(password!=confirmpassword){
         alert('Your passwords did not match.')
     }else if(password==confirmpassword){
-        if(users.find(user => user.username === username) == undefined){
-            users.push({ username, password, authenticated })
-            localStorage.setItem('users', JSON.stringify(users));
-            location.href = '/login'
-        }else{
-            alert('Username has been taken.');
-        }
+        $.post(`${API_URL}/register`, { user, password }).then((response) =>{
+    if (response.success) {
+        location.href = '/login';
+    } else {
+        $('#message').append(`<p class="alert alert-danger">${response}</p>`);
     }
+    });
+    };
 });
 
-$('#Login').on('click', function() {
-    const username = $('#username').val()
-    const password = $('#password').val()
-
-    usernameCheck = users.find(user => user.username === username)
-    authenticated = true
-
-    if(usernameCheck == undefined){
-        alert('Incorrect username')
-    }else{
-        users.forEach(function(user){
-            if(user.password == password && user.username == username){
-                user.authenticated = true
-                localStorage.setItem('users', JSON.stringify(users));
-                alert("Success, logged in.")
-            }
-            else{
-                alert('Password incorrect.')
-            }
-        });
-        
-    }
-
-})
+$('#login').on('click', () => {
+    const user = $('#user').val();
+    const password = $('#password').val();
+    $.post(`${API_URL}/authenticate`, { user, password }).then((response) =>{
+    if (response.success) {
+        localStorage.setItem('user', user);
+        localStorage.setItem('isAdmin', response.isAdmin);
+        location.href = '/';
+    }else{$('#message').append(`<p class="alert alert-danger">${response}</p>`);}
+    })
+});
 
 const logout = () => {
     var currentUser = undefined
@@ -114,6 +97,7 @@ const logout = () => {
     });
     currentUser.authenticated = false
     localStorage.setItem('users', JSON.stringify(users));
+    localStorage.removeItem('user', user);
     location.href = '/login'
 }
 

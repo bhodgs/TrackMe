@@ -109,3 +109,12 @@ app.get('/api/devices/:deviceId/device-history', (req, res) => {
   : res.send(sensorData);
   });
  });
+
+ app.get('/api/users/:user/devices', (req, res) => {
+  const { user } = req.params;
+  Device.find({ "user": user }, (err, devices) => {
+  return err
+  ? res.send(err)
+  : res.send(devices);
+  });
+ });
