@@ -27,19 +27,16 @@
 </nav>
 
 <script>
-        const userlist = JSON.parse(localStorage.getItem('users')) || [];
-        var isAuthenticated = false
         const logoutElement = '<a class="nav-item nav-link" href="/login" onClick="logout()">Logout</a>'
         const loginElement = '<a class="nav-item nav-link" href="/login">Login</a>'
-        userlist.forEach(function(user){
-            if(user.authenticated==true)
+        authenticated = localStorage.getItem('isAuthenticated')
+            if(authenticated=='true')
             {
                 $('#auth-nav').append(logoutElement)
             }
-            else if(user.authenticated==false){
+            else if(authenticated=='false'){
                 $('#auth-nav').append(loginElement)
             };
-            });
     </script>
 
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

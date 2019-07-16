@@ -24,7 +24,6 @@ app.get('/api/test', (req, res) => {
 app.listen(port, () => {
   console.log(`listening on port ${port}`);
 });
-
 app.get('/api/devices', (req, res) => {
   Device.find({}, (err, devices) => {
     return err
