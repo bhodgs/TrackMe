@@ -3,9 +3,6 @@
     - Allow the user to register ASWELL if not logged in, don't force login page.
 */
 
-
-
-
 const API_URL = 'http://localhost:5000/api';
 $('#navbar').load('navbar.html')
 $('#footer').load('footer.html')
@@ -27,7 +24,8 @@ $('#add-device').on('click', function() {
 });
 
 $('#add-user').on('click', function(){
-    const name = $('#username').val()
+    const input = $('#username').val()
+    const name = input.toLowerCase()
     const password = $('#password').val()
     const confirmpassword = $('#confirmpassword').val();
     if(username=='' || password==''){
@@ -48,7 +46,8 @@ $('#add-user').on('click', function(){
 });
 
 $('#login').on('click', () =>{
-    const name = $('#username').val();
+    const input = $('#username').val();
+    const name = input.toLowerCase();
     const password = $('#password').val();
     $.post(`${API_URL}/authenticate`, { name, password }).then((response) =>{
     if (response.success) {
@@ -94,9 +93,12 @@ const currentUser = localStorage.getItem('user');
         console.error(`Error: ${error}`);
          });
     }
-    else{
-        
-    }
+    else {
+        const path = window.location.pathname;
+        if (path !== '/login' || path != '/registration') {
+          location.href = '/login';
+        }
+      }
 
 
     
