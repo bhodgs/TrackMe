@@ -1,3 +1,11 @@
+// TODO:
+/*  
+    - Allow the user to register ASWELL if not logged in, don't force login page.
+*/
+
+
+
+
 const API_URL = 'http://localhost:5000/api';
 $('#navbar').load('navbar.html')
 $('#footer').load('footer.html')
@@ -45,7 +53,7 @@ $('#login').on('click', () =>{
     $.post(`${API_URL}/authenticate`, { name, password }).then((response) =>{
     if (response.success) {
         localStorage.setItem('isAuthenticated', true)
-        localStorage.setItem('user', JSON.stringify({name, password}));
+        localStorage.setItem('user', name.toLowerCase());
         location.href = '/';
     }else{$('#message').append(`<p class="alert alert-danger">${response}</p>`);}
     })
@@ -63,8 +71,7 @@ const currentUser = localStorage.getItem('user');
         $('#devices tbody').append(`
         <tr data-device-id=${device._id}>
         <td>${device.user}</td>
-        <td>${device.name}</td>
-        </tr>`
+        <td>${device.name}</td></tr>`
         );
         });
         $('#devices tbody tr').on('click', (e) => {
@@ -87,7 +94,9 @@ const currentUser = localStorage.getItem('user');
         console.error(`Error: ${error}`);
          });
     }
-
+    else{
+        
+    }
 
 
     
