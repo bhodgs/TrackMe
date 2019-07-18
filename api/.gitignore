@@ -1,4 +1,6 @@
 # node js
 /node_modules
+# docs
+generated-docs/
 
 

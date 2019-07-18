@@ -1,7 +1,4 @@
-// TODO:
-/*  
-    - Allow the user to register ASWELL if not logged in, don't force login page.
-*/
+
 
 const API_URL = 'http://localhost:5000/api';
 $('#navbar').load('navbar.html')
@@ -95,7 +92,7 @@ const currentUser = localStorage.getItem('user');
     }
     else {
         const path = window.location.pathname;
-        if (path !== '/login' || path != '/registration') {
+        if (path !== '/login' && path != '/registration') {
           location.href = '/login';
         }
       }
