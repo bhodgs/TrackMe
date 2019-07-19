@@ -3,13 +3,16 @@ const User = require('./models/user');
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
-app.use(express.static(`${__dirname}/public`));
+
 var bodyParser = require('body-parser');
 const port = process.env.PORT || 5000;
 
 app.use(bodyParser.urlencoded({extended: false}));
 
 app.use(bodyParser.json());
+
+app.use(express.static(`${__dirname}/public`));
+
 
 mongoose.connect(process.env.MONGO_URL);
 
