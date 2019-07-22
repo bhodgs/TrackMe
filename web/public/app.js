@@ -1,6 +1,6 @@
 
 
-const API_URL = 'http://localhost:5000/api';
+const API_URL = 'https://215120652-sit-209-d992s1g2r.now.sh/';
 $('#navbar').load('navbar.html')
 $('#footer').load('footer.html')
 

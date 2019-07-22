@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 app.use(express.static(`${__dirname}/public`));
 
 
-mongoose.connect(process.env.MONGO_URL);
+mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true });
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
