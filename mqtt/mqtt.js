@@ -17,9 +17,11 @@ const client = mqtt.connect({
     username: USERNAME,
     password: PASSWORD
 });
+
 client.on('connect', () => {
     console.log('connected');
 });
+
 app.post('/send-command', (req, res) => {
     const { deviceId, command }  = req.body;
     const topic = `/command/${deviceId}`;
