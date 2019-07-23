@@ -1,0 +1,20 @@
+{
+  "name": "mqtt",
+  "version": "1.0.0",
+  "description": "MQTT Services for TrackMe",
+  "main": "mqtt.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon -r dotenv/config mqtt.js"
+  },
+  "author": "Benjamin Hodgson",
+  "license": "ISC",
+  "devDependencies": {
+    "dotenv": "^8.0.0",
+    "nodemon": "^1.19.1"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "mqtt": "^3.0.0"
+  }
+}
