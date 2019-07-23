@@ -52,16 +52,6 @@ app.get('/api/devices', (req, res) => {
       : res.send(devices);
 }); });
 /**
- * @api {post} /api/send-command Posts a command to the console.
- * @apiGroup Test
- *
- * @apiSuccess {String} The api is working.
- * @apiError {null} No response.
- */
-app.post('/api/send-command', (req, res) => {
-  console.log(req.body.command);
-});
-/**
  * @api {post} /api/devices Posts new device to database.
  * @apiGroup Devices
  * @apiParam {JSON} Array of new device and properties.

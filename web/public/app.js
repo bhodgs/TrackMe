@@ -1,6 +1,5 @@
-
-
 const API_URL = 'https://215120652-sit-209-d992s1g2r.now.sh/';
+
 $('#navbar').load('navbar.html')
 $('#footer').load('footer.html')
 
@@ -96,6 +95,10 @@ const currentUser = localStorage.getItem('user');
           location.href = '/login';
         }
       }
+$("#send-command").on('click', () =>{ 
+    const command = $('#command').val()
+    const deviceId = $('#deviceId').val()
+    $.post('http://localhost:5001/send-command', { command, deviceId });
+});
 
 
-    
