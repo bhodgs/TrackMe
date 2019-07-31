@@ -25,22 +25,22 @@ const client = mqtt.connect({
 
 mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true });
 /**
- * @mqtt {get} Checks connection to mqtt
- * @mqttGroup Connect
+ * @api {get} Checks connection to mqtt
+ * @apiGroup Connect
  *
- * @mqttSuccess {String} 'Connected'
- * @mqttError {String} Error message.
+ * @apiSuccess {String} Connected
+ * @apiError {String} Error message.
  */
 client.on('connect', () => {
     client.subscribe('/sensorData');
     console.log('connected');
 });
 /**
- * @mqtt {get} Obtains message dependant on topic
- * @mqttGroup Device
- *
- * @mqttSuccess {JSON} Data received
- * @mqttError {String} Error message.
+ * @api {get} Obtains message dependant on topic
+ * @apiGroup Device
+ * @apiParam {JSON} DeviceID to findOne
+ * @apiSuccess {JSON} Data received
+ * @apiError {String} Error message.
  */
 client.on('message', (topic, message) => {
   if (topic == '/sensorData') {
@@ -61,11 +61,11 @@ client.on('message', (topic, message) => {
 });
 
 /**
- * @mqtt {POST} Posts command to specific device
- * @mqttGroup Command
- *
- * @mqttSuccess {String} Device and command received.
- * @mqttError {String} Error message.
+ * @api {POST} Posts command to specific device
+ * @apiGroup Command
+ * @apiParam {JSON} Array of deviceID and command.
+ * @apiSuccess {String} Device and command received.
+ * @apiError {String} Error message.
  */
 app.post('/send-command', (req, res) => {
     const { deviceId, command }  = req.body;
@@ -78,11 +78,11 @@ app.post('/send-command', (req, res) => {
 
 
 /**
- * @mqtt {PUT} Puts new sonsor data to MONGO db
- * @mqttGroup Device
- *
- * @mqttSuccess {String} 'Published new message'
- * @mqttError {String} Error message.
+ * @api {PUT} Puts new sonsor data to MONGO db
+ * @apiGroup Device
+ * @apiParam {JSON} Array of deviceId, ts, loc and temp.
+ * @apiSuccess {String} Published new message
+ * @apiError {String} Error message.
  */
 app.put('/sensor-data', (req, res) => {
   const { deviceId } = req.body;
