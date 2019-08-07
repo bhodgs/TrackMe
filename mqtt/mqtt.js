@@ -14,8 +14,6 @@ app.use(bodyParser.urlencoded({
 }));
 
 const { URL, PORT, USERNAME, PASSWORD } = process.env;
-
-
 const client = mqtt.connect({
     host: URL,
     port: PORT,

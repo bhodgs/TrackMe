@@ -9,8 +9,7 @@
 	"routes": [
         {
           "src": "/docs",
-          "dest": "api.js",
-          "methods": ["GET"]
+          "dest": "/public/generated-docs/$1"
         },
         {
           "src": "/api/devices/([^/]+)/device-history",
