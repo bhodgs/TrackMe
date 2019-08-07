@@ -177,3 +177,5 @@ app.get('/api/devices/:deviceId/device-history', (req, res) => {
       : res.send(devices);
   });
  });
+
+

@@ -1,8 +1,14 @@
-const API_URL = 'https://215120652-sit-209-d992s1g2r.now.sh/';
 
+// API Hosted on now.sh
+const API_URL = 'https://215120652-sit-209.now.sh/api';
+// MQTT Hosted locally
+const MQTT_URL = 'http://localhost:5001'
+
+// Load header and footer first
 $('#navbar').load('navbar.html')
 $('#footer').load('footer.html')
 
+// On-click Events                                          ###
 $('#add-device').on('click', function() {
     const name = $('#name').val();
     const username = $('#user').val();
@@ -41,6 +47,13 @@ $('#add-user').on('click', function(){
     }
 });
 
+$("#send-command").on('click', () =>{ 
+    const command = $('#command').val()
+    const deviceId = $('#deviceId').val()
+    const body = { deviceId, command }
+    $.post(`${MQTT_URL}/send-command`, body);
+});
+
 $('#login').on('click', () =>{
     const input = $('#username').val();
     const name = input.toLowerCase();
@@ -53,14 +66,22 @@ $('#login').on('click', () =>{
     }else{$('#message').append(`<p class="alert alert-danger">${response}</p>`);}
     })
 });
+//                                                                                              ##
 
+// Set local-storage for logout
 const logout = () => {
     localStorage.setItem('isAuthenticated', false)
     localStorage.removeItem('user')
+    // Redirect to login page
     location.href = '/login'
 }
+
+
+// Identify current user
 const currentUser = localStorage.getItem('user');
+    // If currentUser not NULL
     if (currentUser) {
+        // Append our individual users details to our tbody.
         $.get(`${API_URL}/users/${currentUser}/devices`).then(response => {
         response.forEach((device) => {
         $('#devices tbody').append(`
@@ -69,6 +90,8 @@ const currentUser = localStorage.getItem('user');
         <td>${device.name}</td></tr>`
         );
         });
+        // Case: User clicks on our tbody.
+        // Apends our history content and shows our modal.
         $('#devices tbody tr').on('click', (e) => {
          const deviceId = e.currentTarget.getAttribute('data-device-id');
          $.get(`${API_URL}/devices/${deviceId}/device-history`).then(response => {
@@ -90,15 +113,12 @@ const currentUser = localStorage.getItem('user');
          });
     }
     else {
+        // Forces registration or login if there are no user details in local storage.
         const path = window.location.pathname;
         if (path !== '/login' && path != '/registration') {
           location.href = '/login';
         }
       }
-$("#send-command").on('click', () =>{ 
-    const command = $('#command').val()
-    const deviceId = $('#deviceId').val()
-    $.post('http://localhost:5001/send-command', { command, deviceId });
-});
+
 
 
