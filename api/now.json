@@ -43,8 +43,14 @@
           "methods": ["POST", "GET"]
         },
         {
+          "src": "/api/users",
+          "dest": "api.js",
+          "methods": ["GET"]
+        },
+        {
           "src": "/(.*)",
-          "dest": "public/generated-docs/$1"
+          "dest": "api.js",
+          "methods": ["GET"]
         }
       ],
     "env": {

@@ -11,11 +11,11 @@ $('#footer').load('footer.html')
 // On-click Events                                          ###
 $('#add-device').on('click', function() {
     const name = $('#name').val();
-    const username = $('#user').val();
+    const user = $('#user').val();
     const sensorData = [];
     const body = {
       name,
-      username,
+      user,
       sensorData
     };
     $.post(`${API_URL}/devices`, body).then(response => {
