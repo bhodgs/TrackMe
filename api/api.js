@@ -22,9 +22,7 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.get('/docs', (req, res) => {
-  res.sendFile(`${__dirname}/public/generated-docs/index.html`);
- });
+
 /**
  * @api {get} /api/test Check if the api is up
  * @apiGroup Test
@@ -178,4 +176,6 @@ app.get('/api/devices/:deviceId/device-history', (req, res) => {
   });
  });
 
-
+ app.get('/docs', (req, res) => {
+  res.sendFile(`${__dirname}/public/generated-docs/index.html`);
+ });

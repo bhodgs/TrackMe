@@ -9,7 +9,8 @@
 	"routes": [
         {
           "src": "/docs",
-          "dest": "/public/generated-docs/$1"
+          "dest": "api.js",
+          "methods": ["GET"]
         },
         {
           "src": "/api/devices/([^/]+)/device-history",
@@ -48,8 +49,7 @@
         },
         {
           "src": "/(.*)",
-          "dest": "api.js",
-          "methods": ["GET"]
+          "dest": "public/generated-docs/$1"
         }
       ],
     "env": {
