@@ -1,0 +1,29 @@
+{
+    "alias": "215120652-sit-209-mqtt",
+    "name": "215120652-sit-209-mqtt",
+    "version": 2,
+    "builds": [
+		{ "src": "mqtt.js", "use": "@now/node" },
+		{ "src": "public/generated-docs/**", "use": "@now/static" }
+	],
+	"routes": [
+        {
+          "src": "/send-command",
+          "dest": "mqtt.js",
+          "methods": ["POST"]
+        },
+        {
+          "src": "/sensor-data",
+          "dest": "mqtt.js",
+          "methods": ["PUT"]
+        }
+      ],
+    "env": {
+        "MONGO_URL": "mongodb+srv://bhodgs:Bumfaceiscool13@cluster0-meoc4.mongodb.net/test?retryWrites=true&w=majority",
+        "URL": "postman.cloudmqtt.com",
+        "PORT": "10527",
+        "USERNAME": "pvqxbsys",
+        "PASSWORD": "s7qkftOMBdiX"
+
+	}
+  }

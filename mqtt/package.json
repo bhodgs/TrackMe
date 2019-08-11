@@ -7,14 +7,15 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon -r dotenv/config mqtt.js",
     "doc": "apidoc -o public/generated-docs/ -e node_modules/",
-    "build": "npm build"
+    "deploy": "now remove 215120652-sit-209-mqtt -y && now -p && now alias"
   },
   "author": "Benjamin Hodgson",
   "license": "ISC",
   "devDependencies": {
     "apidoc": "^0.17.7",
     "dotenv": "^8.0.0",
-    "nodemon": "^1.19.1"
+    "nodemon": "^1.19.1",
+    "now": "^15.8.5"
   },
   "dependencies": {
     "express": "^4.17.1",

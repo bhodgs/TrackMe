@@ -19,7 +19,6 @@
   },
   "devDependencies": {
     "apidoc": "^0.17.7",
-    "nodemon": "^1.19.1",
-    "now": "^15.8.5"
+    "nodemon": "^1.19.1"
   }
 }
