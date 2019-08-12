@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js",
-    "deploy": "git subtree push --prefix web heroku master"
+    "deploy": "git subtree push --prefix web heroku master",
+    "build": "docker build -t latest ."
   },
   "author": "Ben Hodgson",
   "license": "ISC",

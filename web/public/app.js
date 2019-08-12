@@ -1,7 +1,7 @@
 
 // API Hosted on now.sh
 const API_URL = 'https://215120652-sit-209.now.sh/api';
-// MQTT Hosted locally
+// MQTT Hosted on now.sh
 const MQTT_URL = 'https://215120652-sit-209-mqtt-lylzzwszf.now.sh'
 
 // Load header and footer first
